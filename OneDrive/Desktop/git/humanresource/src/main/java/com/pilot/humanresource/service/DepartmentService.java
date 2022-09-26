@@ -1,34 +1,28 @@
 package com.pilot.humanresource.service;
 
-import com.pilot.humanresource.dao.DepartmentRepository;
+import com.pilot.humanresource.DAO.DepartmentRepository;
 import com.pilot.humanresource.model.Department;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class DepartmentService {
+    @Autowired
     private DepartmentRepository repo;
 
-    public List<Department> getAllDepartments(){
-        return repo.getAllDepartments();
-    }
     public Department getDepartmentById(int id){
-        return repo.getDepartmentById(id);
+        return repo.findById(id).orElse(null);
     }
-    public void updateDepartment(int id, Department temp){
-        repo.updateDepartment(id,temp);
+    public Department newDepartment(Department department){
+        return repo.save(department);
     }
-    public void updateDepartment(Department temp){
-        repo.updateDepartment(temp);
+    public void deleteDepartment(int id){
+        repo.deleteById(id);
     }
-    public void newDepartment(Department temp){
-        repo.newDepartment(temp);
-    }
-    public void deleteDepartmentById(int id){
-        repo.deleteDepartmentById(id);
-    }
-    public void deleteAllEmployees(){
-        repo.deleteAllEmployees();
+    public Department updateDepartment(Department department){
+        Department temp = repo.findById(department.getDeptid()).orElse(null);
+        temp.setName(department.getName());
+        temp.setLoc(department.getLoc());
+        return repo.save(temp);
     }
 }

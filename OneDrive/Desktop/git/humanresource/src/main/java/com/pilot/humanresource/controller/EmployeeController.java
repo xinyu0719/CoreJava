@@ -8,38 +8,31 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
-@RequestMapping("/employee")
-public class EmployeeController{
+@RestController
+@RequestMapping("/Employee")
+public class EmployeeController {
+    @Autowired
+    private EmployeeService service;
 
-    public EmployeeService service = new EmployeeService();
-
-    @RequestMapping(value="/all", method= RequestMethod.GET)
-    public List<Employee> getEmployees(){
-        return service.getAllEmployees();
-    }
-
-
-    @GetMapping("/get/{id}")
+    @GetMapping("/employees/{id}")
     public Employee getEmployeeById(@PathVariable int id){
         return service.getEmployeeById(id);
     }
 
-    @PutMapping("/update/{id}")
-    public void updateEmployee(@PathVariable int id, @RequestBody Employee temp){
-        service.updateEmployee(id, temp);
+    @PostMapping("/add")
+    public Employee addNewEmployee(@RequestBody Employee employee){
+        return service.newEmployee(employee);
     }
-
-    @PostMapping("/new")
-    public void updateEmployee(@RequestBody Employee temp){
-        service.newEmployee(temp);
+    @PutMapping("/update")
+    public Employee updateEmployee(@RequestBody Employee employee){
+        return service.updateEmploy(employee);
     }
-
-    @DeleteMapping("/delete/{id}")
-    public void deleteEmployeeById(@PathVariable int id){
-         service.deleteEmployeeById(id);
+    @DeleteMapping("delete/{id}")
+    public void deleteEmployee(@PathVariable int id){
+        service.deleteEmployee(id);
     }
-
 
 }
+
+
 
