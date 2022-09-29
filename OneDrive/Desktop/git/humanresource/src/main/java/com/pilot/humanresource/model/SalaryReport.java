@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
@@ -15,9 +15,8 @@ import java.util.Date;
 @Entity
 @Table(name = "salary_report")
 public class SalaryReport {
-    @Id
-    private String job;
-    private String department;
+    @EmbeddedId
+    private ReportId id;
     private double salmin;
     private double salmax;
     private double salavg;

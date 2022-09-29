@@ -12,10 +12,12 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository repo;
 
-   public Employee getEmployeeById(int id){
+   public Employee getEmployeeById(int id) {
        return repo.findById(id).orElse(null);
    }
-
+   public List<Employee> getAllEmployee(){
+       return repo.findAll();
+   }
    public Employee newEmployee(Employee employee){
        return repo.save(employee);
    }
@@ -27,9 +29,9 @@ public class EmployeeService {
        temp.setName(employee.getName());
        temp.setJob(employee.getJob());
        temp.setManager(employee.getManager());
-       temp.setDeptid(temp.getDeptid());
-       temp.setHiredate(temp.getHiredate());
-       temp.setSalary(temp.getSalary());
+       temp.setDeptid(employee.getDeptid());
+       temp.setHiredate(employee.getHiredate());
+       temp.setSalary(employee.getSalary());
        return repo.save(temp);
    }
 

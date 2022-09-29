@@ -3,7 +3,6 @@ package com.pilot.humanresource.controller;
 import com.pilot.humanresource.model.Employee;
 import com.pilot.humanresource.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +17,10 @@ public class EmployeeController {
     public Employee getEmployeeById(@PathVariable int id){
         return service.getEmployeeById(id);
     }
-
+    @GetMapping("/all")
+    public List<Employee> getAllEmployee(){
+        return service.getAllEmployee();
+    }
     @PostMapping("/add")
     public Employee addNewEmployee(@RequestBody Employee employee){
         return service.newEmployee(employee);

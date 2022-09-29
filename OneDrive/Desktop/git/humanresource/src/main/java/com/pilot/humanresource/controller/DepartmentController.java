@@ -5,8 +5,10 @@ import com.pilot.humanresource.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("Department")
+@RequestMapping("/Department")
 public class DepartmentController {
     @Autowired
     private DepartmentService service;
@@ -14,6 +16,10 @@ public class DepartmentController {
     @GetMapping("/department/{id}")
     public Department getDepartmentById(@PathVariable int id){
         return service.getDepartmentById(id);
+    }
+    @GetMapping("/all")
+    public List<Department> getAllDepartment(){
+        return service.getAllDepartment();
     }
     @PostMapping("/add")
     public Department addNewDepartment(@RequestBody Department department){
